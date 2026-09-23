@@ -1,0 +1,77 @@
+// Esquema de la base de datos de DIMAC MAKER.
+//
+// Motor: PostgreSQL (gratuito en Neon, neon.com, sin tarjeta y sin
+// caducidad). Se eligió Postgres en vez de SQLite porque el hosting
+// gratuito (Render, Vercel, Netlify...) no ofrece disco persistente: un
+// archivo SQLite se perdería en cada reinicio o despliegue. Postgres vive
+// en un servidor aparte (gratis) al que la app se conecta por red, así
+// que sobrevive a reinicios y despliegues sin problema.
+// Ver README, sección "Despliegue en Internet (gratis)".
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Una categoría Maker (Impresión 3D, Electrónica, ...).
+// "TODO" NO es una categoría real: es un filtro especial que vive solo en
+// el frontend (ver src/components/CategoryNav.js), así que aquí no aparece.
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  slug        String    @unique
+  description String? // opcional: no todas las categorías necesitan texto
+  createdAt   DateTime  @default(now())
+  products    Product[]
+}
+
+// Estado de publicación de un producto. Deliberadamente solo dos valores:
+// no necesitamos un flujo editorial más complejo para la V1 (sección 17).
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Product {
+  id          Int           @id @default(autoincrement())
+  name        String
+  slug        String        @unique
+  price       Float
+  description String // ficha técnica objetiva (sección 13)
+  comment     String // "Comentario DIMAC": el porqué práctico (sección 13)
+  amazonUrl   String
+  status      ProductStatus @default(DRAFT)
+  // Marca los productos de demostración incluidos en el seed (sección 19),
+  // para poder distinguirlos y borrarlos fácilmente desde el admin.
+  isDemo      Boolean       @default(false)
+  categoryId  Int
+  category    Category      @relation(fields: [categoryId], references: [id])
+  images      ProductImage[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+// Cada imagen de un producto. La imagen "principal" es simplemente la que
+// tiene la posición más baja (0) dentro de su producto: así "elegir imagen
+// principal" y "reordenar imágenes" son la misma operación (cambiar
+// "position"), en vez de necesitar dos mecanismos distintos.
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  url       String
+  position  Int     @default(0)
+  productId Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+// Textos editables de la portada (sección 16: "Debe poder modificar el
+// pequeño texto introductorio de la portada"). Es una tabla de una sola
+// fila (id fijo = 1) en vez de un sistema de configuración genérico,
+// porque hoy solo necesitamos guardar un campo.
+model SiteSettings {
+  id        Int    @id @default(1)
+  introText String
+}

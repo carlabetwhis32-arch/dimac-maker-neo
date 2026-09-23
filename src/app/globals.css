@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: theme("colors.cream");
+  color: theme("colors.ink");
+}
+
+/* Línea divisoria "muy fina y casi imperceptible" que pide la sección 7. */
+.hairline {
+  border-top: 1px solid theme("colors.border");
+}
+
+/* Estado visual de un producto en borrador dentro del panel de admin. */
+.badge-draft {
+  @apply inline-block rounded-full bg-cream border border-draft/40 text-draft text-xs px-2 py-0.5;
+}
+.badge-published {
+  @apply inline-block rounded-full bg-accent/10 border border-accent/30 text-accent-dark text-xs px-2 py-0.5;
+}

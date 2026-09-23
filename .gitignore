@@ -1,0 +1,19 @@
+# Dependencias
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Imágenes: ya no se guardan en disco (van en la base de datos, ver
+# src/lib/uploads.js), pero se deja la carpeta por si se usa en local.
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Variables de entorno (contienen la contraseña de admin y secretos)
+.env
+.env.local
+
+# Sistema
+.DS_Store
+npm-debug.log*

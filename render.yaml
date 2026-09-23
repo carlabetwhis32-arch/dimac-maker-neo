@@ -1,0 +1,23 @@
+# Blueprint de Render (render.com/docs/blueprint-spec).
+#
+# Permite crear el servicio de un solo paso: en Render, "New +" -> "Blueprint",
+# eligiendo este repositorio. Render lee este archivo y deja ya configurado
+# el servicio web con el plan gratuito; solo hay que rellenar a mano los
+# tres valores secretos (marcados "sync: false" porque no deben ir en un
+# archivo dentro del repositorio).
+services:
+  - type: web
+    name: dimak-maker
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
