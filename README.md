@@ -18,9 +18,9 @@ rehacer nada.
 | Pieza | Elección | Por qué |
 |---|---|---|
 | Framework | **Next.js 14** (App Router, JavaScript) | Un único proyecto sirve tanto el frontend como el backend (páginas + Server Actions), sin necesidad de montar dos proyectos ni una API separada. Gratis, muy documentado, fácil de desplegar. |
-| Base de datos | **SQLite** vía **Prisma** | Para una V1 con pocos productos no hace falta un servidor de base de datos aparte: todo vive en un archivo (`prisma/dev.db`). Prisma da un lenguaje de esquema claro y consultas seguras sin escribir SQL a mano. |
+| Base de datos | **PostgreSQL**, gratis en **Neon** (neon.com) | Se empezó con SQLite (ver historial de este README más abajo), pero un archivo SQLite no sobrevive en un hosting gratuito sin disco persistente. Neon da Postgres gratis para siempre, sin tarjeta, sin caducidad. Prisma habla con ambos igual: solo cambia una línea del esquema. |
 | Estilos | **Tailwind CSS** | Permite construir la interfaz minimalista pedida directamente con clases, sin mantener archivos CSS grandes y dispersos. |
-| Imágenes | Sistema de archivos local (`/public/uploads`) | Gratis y sin configuración adicional para trabajar en local. Se documenta cómo migrarlo a un servicio en la nube cuando haga falta (sección 9). |
+| Imágenes | **Guardadas en la propia base de datos** (como `data:` URI en base64) | El hosting gratuito tampoco tiene disco persistente para archivos subidos. Guardarlas en Postgres evita depender de un tercer servicio (Cloudinary, S3...) solo para esto. Ver `src/lib/uploads.js`. |
 | Autenticación admin | Contraseña + cookie firmada (HMAC) | Solo hay un usuario (tú) y no hace falta ni base de usuarios ni una librería de autenticación completa. Ver sección 6. |
 
 **No se usó:** NextAuth, tRPC, GraphQL, Redux/Zustand, un CMS externo,
@@ -50,7 +50,8 @@ del propio proyecto en vez de como endpoints HTTP separados.
 ## 3. Estructura de carpetas
 
 ```
-dimac-maker/
+dimak-maker/
+├── render.yaml                # Configuración de despliegue en Render (ver sección 9)
 ├── prisma/
 │   ├── schema.prisma        # Modelos de datos (Category, Product, ProductImage, SiteSettings)
 │   └── seed.js               # Crea las categorías y productos DEMO
@@ -168,25 +169,103 @@ comprueba esa cookie antes de mostrar cualquier página de administración.
 
 ## 8. Imágenes
 
-Se suben desde el formulario de producto (`<input type="file" multiple>`)
-y se guardan en `/public/uploads` con un nombre aleatorio
-(`src/lib/uploads.js`). Al borrar una imagen o un producto, su archivo se
-borra también del disco, para no acumular archivos huérfanos.
+Se suben desde el formulario de producto (`<input type="file" multiple>`) y
+se guardan directamente en la base de datos, codificadas en base64
+(`src/lib/uploads.js`). Al borrar una imagen o un producto, su fila se
+borra sin más: no hay ningún archivo aparte que limpiar. Es la solución
+más sencilla que funciona igual en local que en cualquier hosting
+gratuito (ver siguiente sección).
 
-## 9. Despliegue futuro: qué cambiaría
+## 9. Despliegue en Internet, gratis (Render + Neon)
 
-Esta V1 está pensada para correr en local o en un servidor con disco
-persistente. Si más adelante se despliega en un hosting "serverless" (p.
-ej. Vercel) sin disco persistente, dos cosas dejan de valer tal cual:
+Esta app está preparada para funcionar en un hosting gratuito sin tarjeta.
+Se usan dos servicios, ambos con plan gratuito permanente (no son
+pruebas de 15/30 días):
 
-1. **Base de datos**: SQLite necesita un archivo persistente. Bastaría
-   con cambiar `provider = "sqlite"` por `"postgresql"` en
-   `prisma/schema.prisma` y apuntar `DATABASE_URL` a una base de datos
-   gratuita (por ejemplo, Supabase o Neon tienen planes gratuitos). El
-   resto del código no cambia: sigue siendo Prisma.
-2. **Imágenes**: habría que sustituir `src/lib/uploads.js` por una subida
-   a un servicio con almacenamiento persistente (Cloudinary, S3,
-   Vercel Blob...). Es el único archivo que tocarían esos cambios.
+- **Neon** (neon.com): base de datos Postgres.
+- **Render** (render.com): donde corre la aplicación (web service).
+
+> **¿Por qué Render y no Vercel?** Vercel también tiene un plan gratuito
+> (Hobby) muy bueno para Next.js, pero sus condiciones de uso limitan el
+> plan gratuito a proyectos no comerciales, y mencionan explícitamente
+> "enlaces de afiliado como propósito principal del sitio" como ejemplo
+> de uso que requeriría su plan de pago. Como DIMAC MAKER es, precisamente,
+> un sitio de afiliación con Amazon, Render evita ese conflicto y sigue
+> siendo 100% gratuito para este caso. (Esto no es asesoramiento legal:
+> es una lectura de las condiciones públicas de Vercel en el momento de
+> escribir esto; si prefieres usar Vercel de todos modos, el proyecto
+> también funciona ahí sin cambios adicionales).
+
+### Paso a paso
+
+**1. Sube el proyecto a GitHub** (gratis). El proyecto ya tiene un
+repositorio git inicializado con todo el código. Crea un repositorio
+vacío en [github.com/new](https://github.com/new) llamado `dimak-maker`
+(sin marcar "Add a README") y luego, en la terminal, dentro de la carpeta
+del proyecto:
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/dimak-maker.git
+git branch -M main
+git push -u origin main
+```
+
+**2. Crea la base de datos en Neon**: entra en
+[neon.com](https://neon.com), regístrate gratis (sin tarjeta), crea un
+proyecto nuevo y copia el "Connection string" que te da (empieza por
+`postgresql://...`).
+
+**3. Configura y prueba en local con esa base de datos real**:
+
+```bash
+# En tu .env, pega la cadena de Neon en DATABASE_URL
+npx prisma migrate dev --name init   # crea las tablas en Neon
+npm run seed                          # rellena las categorías y productos DEMO
+npm run dev                           # comprueba que todo sigue funcionando
+```
+
+Esto crea la carpeta `prisma/migrations/`: súbela también a GitHub
+(`git add -A && git commit -m "Migraciones iniciales" && git push`).
+
+**4. Crea el servicio en Render**: entra en
+[render.com](https://render.com) y regístrate gratis con tu cuenta de
+GitHub (sin tarjeta). Pulsa **"New +" → "Blueprint"**, elige el
+repositorio `dimak-maker` (el archivo `render.yaml` del proyecto
+configura el servicio automáticamente) y, cuando te lo pida, rellena
+estas tres variables de entorno con tus propios valores:
+
+- `DATABASE_URL` → la cadena de conexión de Neon (la misma del paso 2)
+- `ADMIN_PASSWORD_HASH` → la que generaste con `npm run hash-password`
+- `SESSION_SECRET` → la cadena aleatoria larga que elegiste
+
+Pulsa **"Apply"**/**"Create Web Service"**. Render instalará
+dependencias, aplicará las migraciones (`prisma migrate deploy`, dentro
+del `build` de `package.json`) y arrancará la app. La primera vez tarda
+unos minutos.
+
+**5. Abre tu URL pública**: Render te la da con el formato
+`https://dimak-maker.onrender.com` (o `dimak-maker-XXXX.onrender.com` si
+ese nombre exacto ya estaba cogido).
+
+> **Nota sobre el plan gratuito de Render**: el servicio "se duerme" tras
+> ~15 minutos sin visitas, y la primera visita después tarda unos 30-50
+> segundos en despertar. Es normal y no cuesta nada: simplemente el
+> hosting gratuito prioriza tráfico de pago. Para un proyecto personal
+> que está empezando es una limitación razonable.
+
+### Si algo falla en el despliegue
+
+En el panel de Render, pestaña **"Logs"**, verás el error exacto del
+build o del arranque. Los fallos más habituales:
+
+- **Falta una variable de entorno**: revisa que las tres (`DATABASE_URL`,
+  `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`) estén rellenas en
+  "Environment" dentro de Render.
+- **Error de migración** ("relation already exists" o similar): suele
+  pasar si ya aplicaste las migraciones a mano contra esa misma base de
+  datos. No es grave: `prisma migrate deploy` es seguro de repetir.
+- **La contraseña de admin no funciona**: asegúrate de haber copiado el
+  hash completo (empieza por `$2a$` o `$2b$`) sin comillas de más.
 
 ## 10. Amazon Afiliados: cómo se implementó
 
@@ -214,7 +293,10 @@ ej. Vercel) sin disco persistente, dos cosas dejan de valer tal cual:
 
 ## 11. Ejecución local, paso a paso
 
-**Requisitos**: Node.js 18.17 o superior ([nodejs.org](https://nodejs.org)).
+**Requisitos**: Node.js 18.17 o superior ([nodejs.org](https://nodejs.org))
+y una base de datos Postgres gratuita en [Neon](https://neon.com) (crea
+un proyecto y copia su "Connection string"; tarda un minuto y no pide
+tarjeta). También sirve cualquier otro Postgres si ya tienes uno.
 
 ```bash
 # 1. Instalar dependencias
@@ -222,6 +304,7 @@ npm install
 
 # 2. Crear tu archivo de variables de entorno
 cp .env.example .env
+# Pega tu cadena de conexión de Neon en DATABASE_URL dentro de .env
 
 # 3. Generar el hash de tu contraseña de admin y copiarlo en .env
 npm run hash-password -- "la-contraseña-que-quieras"
@@ -231,7 +314,7 @@ npm run hash-password -- "la-contraseña-que-quieras"
 # (cualquier frase larga sirve, por ejemplo generada con:)
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
-# 5. Crear la base de datos (aplica el esquema de prisma/schema.prisma)
+# 5. Crear las tablas en tu base de datos (aplica prisma/schema.prisma)
 npx prisma migrate dev --name init
 
 # 6. Rellenar con las categorías y productos DEMO
