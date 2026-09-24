@@ -17,7 +17,7 @@ rehacer nada.
 
 | Pieza | Elección | Por qué |
 |---|---|---|
-| Framework | **Next.js 14** (App Router, JavaScript) | Un único proyecto sirve tanto el frontend como el backend (páginas + Server Actions), sin necesidad de montar dos proyectos ni una API separada. Gratis, muy documentado, fácil de desplegar. |
+| Framework | **Next.js 16** (App Router, JavaScript) | Un único proyecto sirve tanto el frontend como el backend (páginas + Server Actions), sin necesidad de montar dos proyectos ni una API separada. Gratis, muy documentado, fácil de desplegar. |
 | Base de datos | **PostgreSQL**, gratis en **Neon** (neon.com) | Se empezó con SQLite (ver historial de este README más abajo), pero un archivo SQLite no sobrevive en un hosting gratuito sin disco persistente. Neon da Postgres gratis para siempre, sin tarjeta, sin caducidad. Prisma habla con ambos igual: solo cambia una línea del esquema. |
 | Estilos | **Tailwind CSS** | Permite construir la interfaz minimalista pedida directamente con clases, sin mantener archivos CSS grandes y dispersos. |
 | Imágenes | **Guardadas en la propia base de datos** (como `data:` URI en base64) | El hosting gratuito tampoco tiene disco persistente para archivos subidos. Guardarlas en Postgres evita depender de un tercer servicio (Cloudinary, S3...) solo para esto. Ver `src/lib/uploads.js`. |
@@ -293,7 +293,7 @@ build o del arranque. Los fallos más habituales:
 
 ## 11. Ejecución local, paso a paso
 
-**Requisitos**: Node.js 18.17 o superior ([nodejs.org](https://nodejs.org))
+**Requisitos**: Node.js 20.9 o superior ([nodejs.org](https://nodejs.org))
 y una base de datos Postgres gratuita en [Neon](https://neon.com) (crea
 un proyecto y copia su "Connection string"; tarda un minuto y no pide
 tarjeta). También sirve cualquier otro Postgres si ya tienes uno.

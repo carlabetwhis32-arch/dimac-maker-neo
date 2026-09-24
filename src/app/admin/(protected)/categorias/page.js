@@ -5,6 +5,7 @@ import { createCategory, updateCategory, deleteCategory } from "./actions";
 export const metadata = { title: "Categorías — DIMAC MAKER" };
 
 export default async function AdminCategoriesPage({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
   const categories = await prisma.category.findMany({
     orderBy: { name: "asc" },
     include: { _count: { select: { products: true } } },
@@ -14,9 +15,9 @@ export default async function AdminCategoriesPage({ searchParams }) {
     <div className="space-y-10 max-w-3xl">
       <h1 className="text-xl font-semibold text-ink">Categorías</h1>
 
-      {searchParams?.error && (
+      {resolvedSearchParams?.error && (
         <p className="text-sm text-accent-dark bg-accent/10 border border-accent/30 rounded-md px-3 py-2">
-          {searchParams.error}
+          {resolvedSearchParams.error}
         </p>
       )}
 

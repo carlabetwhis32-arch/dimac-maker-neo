@@ -4,6 +4,7 @@ import { updateIntroText } from "./actions";
 export const metadata = { title: "Portada — DIMAC MAKER" };
 
 export default async function AdminHomeSettingsPage({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
   const settings = await prisma.siteSettings.findUnique({ where: { id: 1 } });
 
   return (
@@ -14,14 +15,14 @@ export default async function AdminHomeSettingsPage({ searchParams }) {
         página de inicio (máximo una o dos líneas recomendadas).
       </p>
 
-      {searchParams?.saved && (
+      {resolvedSearchParams?.saved && (
         <p className="text-sm text-accent-dark bg-accent/10 border border-accent/30 rounded-md px-3 py-2">
           Texto actualizado.
         </p>
       )}
-      {searchParams?.error && (
+      {resolvedSearchParams?.error && (
         <p className="text-sm text-accent-dark bg-accent/10 border border-accent/30 rounded-md px-3 py-2">
-          {searchParams.error}
+          {resolvedSearchParams.error}
         </p>
       )}
 

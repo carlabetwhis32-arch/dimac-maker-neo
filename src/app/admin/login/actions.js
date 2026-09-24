@@ -16,7 +16,9 @@ export async function loginAction(formData) {
     redirect("/admin/login?error=1");
   }
 
-  cookies().set(SESSION_COOKIE_NAME, createSessionCookieValue(), {
+  // A partir de Next.js 15/16, cookies() devuelve una promesa.
+  const cookieStore = await cookies();
+  cookieStore.set(SESSION_COOKIE_NAME, createSessionCookieValue(), {
     httpOnly: true, // el JavaScript del navegador no puede leerla
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -28,6 +30,7 @@ export async function loginAction(formData) {
 }
 
 export async function logoutAction() {
-  cookies().delete(SESSION_COOKIE_NAME);
+  const cookieStore = await cookies();
+  cookieStore.delete(SESSION_COOKIE_NAME);
   redirect("/admin/login");
 }

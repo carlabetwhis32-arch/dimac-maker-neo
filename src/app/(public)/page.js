@@ -7,7 +7,8 @@ import ProductGrid from "@/components/ProductGrid";
 // montar una API propia solo para listar productos (ver README, sección
 // "Arquitectura").
 export default async function HomePage({ searchParams }) {
-  const activeSlug = searchParams?.categoria || null;
+  const resolvedSearchParams = await searchParams;
+  const activeSlug = resolvedSearchParams?.categoria || null;
 
   const [categories, settings] = await Promise.all([
     prisma.category.findMany({ orderBy: { name: "asc" } }),

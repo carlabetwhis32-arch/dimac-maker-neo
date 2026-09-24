@@ -2,8 +2,9 @@ import { loginAction } from "./actions";
 
 export const metadata = { title: "Acceso privado — DIMAC MAKER" };
 
-export default function LoginPage({ searchParams }) {
-  const hasError = searchParams?.error === "1";
+export default async function LoginPage({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
+  const hasError = resolvedSearchParams?.error === "1";
 
   return (
     <div className="max-w-sm mx-auto py-16 px-6">

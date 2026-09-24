@@ -11,8 +11,11 @@ import { logoutAction } from "../login/actions";
  * dentro de este grupo, no hace falta repetir esta comprobación en cada
  * página.
  */
-export default function ProtectedAdminLayout({ children }) {
-  const sessionCookie = cookies().get(SESSION_COOKIE_NAME)?.value;
+export default async function ProtectedAdminLayout({ children }) {
+  // A partir de Next.js 15/16, cookies() devuelve una promesa: hay que
+  // esperarla antes de poder leer una cookie concreta.
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)?.value;
 
   if (!isSessionValid(sessionCookie)) {
     redirect("/admin/login");

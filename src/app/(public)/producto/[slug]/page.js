@@ -5,8 +5,10 @@ import { AMAZON_DISCLOSURE_SHORT } from "@/lib/legalText";
 import ImageGallery from "@/components/ImageGallery";
 
 export default async function ProductPage({ params }) {
+  const { slug } = await params;
+
   const product = await prisma.product.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     include: {
       images: { orderBy: { position: "asc" } },
       category: true,

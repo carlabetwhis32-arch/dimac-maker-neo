@@ -10,7 +10,9 @@ import {
 export const metadata = { title: "Editar producto — DIMAC MAKER" };
 
 export default async function EditProductPage({ params, searchParams }) {
-  const id = Number(params.id);
+  const { id: idParam } = await params;
+  const resolvedSearchParams = await searchParams;
+  const id = Number(idParam);
 
   const [product, categories] = await Promise.all([
     prisma.product.findUnique({
@@ -38,14 +40,14 @@ export default async function EditProductPage({ params, searchParams }) {
         </a>
       </div>
 
-      {searchParams?.saved && (
+      {resolvedSearchParams?.saved && (
         <p className="text-sm text-accent-dark bg-accent/10 border border-accent/30 rounded-md px-3 py-2">
           Cambios guardados.
         </p>
       )}
-      {searchParams?.error && (
+      {resolvedSearchParams?.error && (
         <p className="text-sm text-accent-dark bg-accent/10 border border-accent/30 rounded-md px-3 py-2">
-          {searchParams.error}
+          {resolvedSearchParams.error}
         </p>
       )}
 
