@@ -11,7 +11,7 @@ export default function CategoryNav({ categories, activeSlug }) {
   const isAllActive = !activeSlug || activeSlug === "todo";
 
   return (
-    <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+    <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[15px] border-b border-dashed border-border pb-px">
       <NavItem href="/" label="Todo" active={isAllActive} />
       {categories.map((cat) => (
         <NavItem
@@ -31,11 +31,11 @@ function NavItem({ href, label, active }) {
       href={href}
       className={
         active
-          ? "text-ink font-medium border-b-2 border-accent pb-1"
-          : "text-muted hover:text-ink pb-1 border-b-2 border-transparent"
+          ? "text-ink font-semibold border-b-2 border-accent pb-2 -mb-px"
+          : "text-muted hover:text-ink pb-2 -mb-px border-b-2 border-transparent"
       }
     >
-      {label.toUpperCase()}
+      {label}
     </Link>
   );
 }

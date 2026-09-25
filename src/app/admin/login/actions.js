@@ -10,7 +10,23 @@ import {
 
 export async function loginAction(formData) {
   const password = formData.get("password");
-  const isValid = await verifyAdminPassword(password);
+
+  // Si falta o está mal ADMIN_PASSWORD_HASH/SESSION_SECRET en .env,
+  // verifyAdminPassword lanza un error con el motivo exacto. Lo separamos
+  // del redirect() de más abajo a propósito: redirect() funciona lanzando
+  // una excepción especial por dentro, así que no debe quedar atrapada
+  // por este mismo try/catch.
+  let isValid = false;
+  let configErrorMessage = null;
+  try {
+    isValid = await verifyAdminPassword(password);
+  } catch (err) {
+    configErrorMessage = err.message;
+  }
+
+  if (configErrorMessage) {
+    redirect(`/admin/login?error=config&message=${encodeURIComponent(configErrorMessage)}`);
+  }
 
   if (!isValid) {
     redirect("/admin/login?error=1");

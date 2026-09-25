@@ -25,7 +25,7 @@ export default async function AdminCategoriesPage({ searchParams }) {
         {categories.map((category) => (
           <div
             key={category.id}
-            className="border border-border rounded-md p-4 bg-white space-y-3"
+            className="border border-border rounded-md p-4 bg-paper space-y-3"
           >
             <div className="flex items-center justify-between">
               <span className="text-xs text-muted">
@@ -78,13 +78,13 @@ export default async function AdminCategoriesPage({ searchParams }) {
             name="name"
             required
             placeholder="Nombre"
-            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
           />
           <textarea
             name="description"
             rows={2}
             placeholder="Descripción (opcional)"
-            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
           />
           <button
             type="submit"

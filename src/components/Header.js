@@ -11,9 +11,9 @@ export default function Header() {
       <div className="max-w-site mx-auto px-6 py-5">
         <Link
           href="/"
-          className="text-lg tracking-wide font-semibold text-ink"
+          className="text-xl tracking-tight font-bold text-ink"
         >
-          DIMAC — MAKER
+          DIMAC <span className="text-accent">—</span> MAKER
         </Link>
       </div>
     </header>

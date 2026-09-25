@@ -14,7 +14,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
           name="name"
           defaultValue={product?.name}
           required
-          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
         />
       </Field>
 
@@ -27,7 +27,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
             min="0"
             defaultValue={product?.price}
             required
-            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
           />
         </Field>
 
@@ -36,7 +36,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
             name="categoryId"
             defaultValue={product?.categoryId}
             required
-            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
           >
             <option value="" disabled>
               Selecciona...
@@ -57,7 +57,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
           defaultValue={product?.amazonUrl}
           required
           placeholder="https://www.amazon.es/dp/..."
-          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
         />
       </Field>
 
@@ -67,7 +67,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
           defaultValue={product?.description}
           required
           rows={4}
-          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
         />
       </Field>
 
@@ -77,7 +77,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
           defaultValue={product?.comment}
           required
           rows={4}
-          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
         />
       </Field>
 
@@ -95,7 +95,7 @@ export default function ProductForm({ action, categories, product, submitLabel }
         <select
           name="status"
           defaultValue={product?.status ?? "DRAFT"}
-          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
         >
           <option value="DRAFT">Borrador</option>
           <option value="PUBLISHED">Publicado</option>

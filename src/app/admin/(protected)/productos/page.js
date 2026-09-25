@@ -29,13 +29,13 @@ export default async function AdminProductsPage() {
         </Link>
       </div>
 
-      <div className="border border-border rounded-md bg-white divide-y divide-border">
+      <div className="border border-border rounded-md bg-paper divide-y divide-border">
         {products.map((product) => (
           <div
             key={product.id}
             className="flex items-center gap-4 p-3"
           >
-            <div className="h-14 w-14 shrink-0 rounded bg-cream border border-border overflow-hidden">
+            <div className="h-14 w-14 shrink-0 rounded bg-kraft border border-border overflow-hidden">
               {product.images[0] && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img

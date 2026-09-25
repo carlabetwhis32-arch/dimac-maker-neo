@@ -70,9 +70,9 @@ export default async function EditProductPage({ params, searchParams }) {
           {product.images.map((image, index) => (
             <div
               key={image.id}
-              className="w-32 border border-border rounded-md bg-white p-2 space-y-2"
+              className="w-32 border border-border rounded-md bg-paper p-2 space-y-2"
             >
-              <div className="relative aspect-square rounded overflow-hidden bg-cream">
+              <div className="relative aspect-square rounded overflow-hidden bg-kraft">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={image.url}

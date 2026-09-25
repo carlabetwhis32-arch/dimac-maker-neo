@@ -16,7 +16,7 @@ const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
  * el navegador puede guardar la cookie pero no puede fabricar una válida.
  */
 function sign(value) {
-  const secret = process.env.SESSION_SECRET;
+  const secret = cleanEnvValue(process.env.SESSION_SECRET);
   if (!secret) {
     throw new Error(
       "Falta SESSION_SECRET en .env. Revisa .env.example para configurarlo."
@@ -53,14 +53,35 @@ export function isSessionValid(cookieValue) {
   return Number.isFinite(expiresAt) && Date.now() < expiresAt;
 }
 
+/**
+ * Limpia comillas y espacios accidentales al copiar/pegar en .env.
+ * Es muy fácil, copiando a mano, acabar con algo como `""$2a$10$..."` en
+ * vez de `"$2a$10$..."`: esto evita que ese despiste rompa el login sin
+ * dar ninguna pista de por qué.
+ */
+function cleanEnvValue(value) {
+  if (!value) return value;
+  return value.trim().replace(/^"+|"+$/g, "");
+}
+
 /** Compara la contraseña introducida en el login con el hash guardado en .env. */
 export async function verifyAdminPassword(password) {
-  const hash = process.env.ADMIN_PASSWORD_HASH;
+  const hash = cleanEnvValue(process.env.ADMIN_PASSWORD_HASH);
+
   if (!hash) {
     throw new Error(
-      "Falta ADMIN_PASSWORD_HASH en .env. Genera uno con: npm run hash-password -- \"tu-contraseña\""
+      'Falta ADMIN_PASSWORD_HASH en .env. Genera uno con: npm run hash-password -- "tu-contraseña"'
     );
   }
+
+  // Un hash de bcrypt válido siempre empieza así. Si no, casi seguro que
+  // se ha copiado mal (comillas de más, texto cortado...).
+  if (!/^\$2[aby]\$/.test(hash)) {
+    throw new Error(
+      "ADMIN_PASSWORD_HASH en tu .env no parece un hash válido (debería empezar por $2a$ o $2b$). Vuelve a generarlo con: npm run hash-password -- \"tu-contraseña\" y pega la línea completa, tal cual, en .env."
+    );
+  }
+
   if (!password) return false;
   return bcrypt.compare(password, hash);
 }

@@ -32,7 +32,7 @@ export default async function AdminHomeSettingsPage({ searchParams }) {
           defaultValue={settings?.introText}
           rows={3}
           required
-          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-white"
+          className="w-full border border-border rounded-md px-3 py-2 text-sm bg-paper"
         />
         <button
           type="submit"

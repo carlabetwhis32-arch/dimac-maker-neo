@@ -1,6 +1,9 @@
+import BackButton from "./BackButton";
+
 export default function LegalPage({ title, updated, children }) {
   return (
     <article className="max-w-2xl space-y-6">
+      <BackButton />
       <div>
         <h1 className="text-xl font-semibold text-ink">{title}</h1>
         <p className="text-xs text-muted mt-1">

@@ -29,7 +29,7 @@ export default async function AdminDashboardPage() {
         </Link>
         <Link
           href="/admin/productos"
-          className="inline-block border border-border text-sm font-medium px-4 py-2 rounded-md hover:bg-white"
+          className="inline-block border border-border text-sm font-medium px-4 py-2 rounded-md hover:bg-paper"
         >
           Ver todos los productos
         </Link>
@@ -40,7 +40,7 @@ export default async function AdminDashboardPage() {
 
 function Stat({ label, value }) {
   return (
-    <div className="border border-border rounded-md p-4 bg-white">
+    <div className="border border-border rounded-md p-4 bg-paper">
       <p className="text-2xl font-semibold text-ink">{value}</p>
       <p className="text-xs text-muted mt-1">{label}</p>
     </div>

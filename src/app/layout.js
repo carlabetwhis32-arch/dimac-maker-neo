@@ -1,7 +1,20 @@
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+// IBM Plex se diseñó originalmente para documentación técnica/de ingeniería
+// de IBM: encaja con el mundo Maker mejor que una sans genérica de SaaS.
+// La mono se usa solo para el precio (ver .price-tag en globals.css), no
+// como decoración general.
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plex-sans",
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-plex-mono",
+});
 
 export const metadata = {
   title: "DIMAC — MAKER",
@@ -21,7 +34,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${plexSans.variable} ${plexMono.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

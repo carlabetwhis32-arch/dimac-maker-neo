@@ -12,7 +12,7 @@ export default function ProductCard({ product }) {
 
   return (
     <Link href={`/producto/${product.slug}`} className="group block">
-      <div className="aspect-square w-full overflow-hidden rounded-md bg-white border border-border">
+      <div className="aspect-square w-full overflow-hidden rounded-sm bg-paper border border-border">
         {mainImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -28,11 +28,11 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      <div className="mt-3 space-y-0.5">
+      <div className="mt-3 space-y-1">
         <p className="text-sm text-ink leading-snug line-clamp-2">
           {product.name}
         </p>
-        <p className="text-sm font-medium text-ink">
+        <p className="price-tag text-sm text-copper">
           {formatPrice(product.price)}
         </p>
       </div>

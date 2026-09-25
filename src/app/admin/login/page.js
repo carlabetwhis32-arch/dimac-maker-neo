@@ -5,6 +5,8 @@ export const metadata = { title: "Acceso privado — DIMAC MAKER" };
 export default async function LoginPage({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   const hasError = resolvedSearchParams?.error === "1";
+  const isConfigError = resolvedSearchParams?.error === "config";
+  const configMessage = resolvedSearchParams?.message;
 
   return (
     <div className="max-w-sm mx-auto py-16 px-6">
@@ -27,12 +29,19 @@ export default async function LoginPage({ searchParams }) {
             type="password"
             required
             autoFocus
-            className="w-full border border-border rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-accent/40"
+            className="w-full border border-border rounded-md px-3 py-2 bg-paper focus:outline-none focus:ring-2 focus:ring-accent/40"
           />
         </div>
 
         {hasError && (
           <p className="text-sm text-accent-dark">Contraseña incorrecta.</p>
+        )}
+
+        {isConfigError && (
+          <div className="text-sm text-copper bg-copper/10 border border-copper/30 rounded-md px-3 py-2">
+            <p className="font-medium mb-1">Hay un problema en la configuración, no en la contraseña:</p>
+            <p>{configMessage}</p>
+          </div>
         )}
 
         <button
