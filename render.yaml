@@ -7,7 +7,7 @@
 # archivo dentro del repositorio).
 services:
   - type: web
-    name: dimak-maker
+    name: dimac-maker
     runtime: node
     plan: free
     buildCommand: npm install && npm run build

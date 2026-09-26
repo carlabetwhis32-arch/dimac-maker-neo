@@ -50,7 +50,7 @@ del propio proyecto en vez de como endpoints HTTP separados.
 ## 3. Estructura de carpetas
 
 ```
-dimak-maker/
+dimac-maker/
 ├── render.yaml                # Configuración de despliegue en Render (ver sección 9)
 ├── prisma/
 │   ├── schema.prisma        # Modelos de datos (Category, Product, ProductImage, SiteSettings)
@@ -200,12 +200,12 @@ pruebas de 15/30 días):
 
 **1. Sube el proyecto a GitHub** (gratis). El proyecto ya tiene un
 repositorio git inicializado con todo el código. Crea un repositorio
-vacío en [github.com/new](https://github.com/new) llamado `dimak-maker`
+vacío en [github.com/new](https://github.com/new) llamado `dimac-maker`
 (sin marcar "Add a README") y luego, en la terminal, dentro de la carpeta
 del proyecto:
 
 ```bash
-git remote add origin https://github.com/TU-USUARIO/dimak-maker.git
+git remote add origin https://github.com/TU-USUARIO/dimac-maker.git
 git branch -M main
 git push -u origin main
 ```
@@ -230,7 +230,7 @@ Esto crea la carpeta `prisma/migrations/`: súbela también a GitHub
 **4. Crea el servicio en Render**: entra en
 [render.com](https://render.com) y regístrate gratis con tu cuenta de
 GitHub (sin tarjeta). Pulsa **"New +" → "Blueprint"**, elige el
-repositorio `dimak-maker` (el archivo `render.yaml` del proyecto
+repositorio `dimac-maker` (el archivo `render.yaml` del proyecto
 configura el servicio automáticamente) y, cuando te lo pida, rellena
 estas tres variables de entorno con tus propios valores:
 
@@ -244,7 +244,7 @@ del `build` de `package.json`) y arrancará la app. La primera vez tarda
 unos minutos.
 
 **5. Abre tu URL pública**: Render te la da con el formato
-`https://dimak-maker.onrender.com` (o `dimak-maker-XXXX.onrender.com` si
+`https://dimac-maker.onrender.com` (o `dimac-maker-XXXX.onrender.com` si
 ese nombre exacto ya estaba cogido).
 
 > **Nota sobre el plan gratuito de Render**: el servicio "se duerme" tras

@@ -20,15 +20,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        kraft: "#E4D9BF",
+        kraft: "#D8C39A",
         paper: "#FBF7EE",
+        mint: "#EAF0E3",
+        clay: "#F5E6D6",
+        straw: "#F8EED6",
         ink: "#26211B",
         muted: "#6B5F4C",
-        border: "#D3C2A0",
-        accent: "#3B6E58",
-        "accent-dark": "#2B5443",
-        copper: "#B5622A",
-        ochre: "#C98A1C",
+        border: "#C4AD82",
+        accent: "#355E4B",
+        "accent-dark": "#274436",
+        copper: "#A85423",
+        ochre: "#BE7F14",
       },
       fontFamily: {
         sans: ["var(--font-plex-sans)", "-apple-system", "sans-serif"],
