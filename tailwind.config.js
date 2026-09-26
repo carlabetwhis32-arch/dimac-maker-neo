@@ -1,37 +1,51 @@
 /**
- * Paleta de DIMAC MAKER — v2.
+ * Paleta de DIMAC MAKER — v3.
  *
- * La v1 usaba crema + naranja terracota, que resulta que es justo la
- * combinación por defecto que "delata" un diseño genérico/plantilla. Esta
- * versión se apoya en materiales reales del mundo Maker:
- * - "kraft": el cartón/papel kraft de las cajas y embalajes de electrónica.
- * - "paper": el blanco roto de una hoja de specs, no blanco puro de UI.
- * - "pcb": el verde de una placa de circuito impreso — acento principal.
- * - "copper": el cobre de un cable pelado o una pista soldada — acento secundario.
- * - "ochre": el amarillo de una cinta de aviso/rotulador de taller — para
- *   estados de "atención" (borrador, demo).
+ * Cambio de dirección pedido explícitamente: el fondo ya no es cálido/kraft,
+ * sino frío y neutro (grafito muy claro), y el color ya no rota tarjeta a
+ * tarjeta: cada CATEGORÍA tiene su propio color fijo (ver
+ * src/lib/categoryColors.js), que se usa tanto en el selector de categoría
+ * como en las tarjetas de sus productos. El fondo se queda deliberadamente
+ * discreto para que sean esos colores de categoría, y las fotos de
+ * producto, los que den la personalidad — no un patrón decorativo.
  */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/app/**/*.{js,jsx}",
     "./src/components/**/*.{js,jsx}",
+    "./src/lib/**/*.{js,jsx}",
   ],
   theme: {
     extend: {
       colors: {
-        kraft: "#D8C39A",
-        paper: "#FBF7EE",
-        mint: "#EAF0E3",
-        clay: "#F5E6D6",
-        straw: "#F8EED6",
-        ink: "#26211B",
-        muted: "#6B5F4C",
-        border: "#C4AD82",
-        accent: "#355E4B",
-        "accent-dark": "#274436",
-        copper: "#A85423",
-        ochre: "#BE7F14",
+        // Fondo y neutros: fríos, no cálidos (petición explícita).
+        base: "#EEF0F3",
+        paper: "#FFFFFF",
+        ink: "#1C1F24",
+        muted: "#5B6472",
+        border: "#DCE1E7",
+
+        // Un color fijo por categoría (mismo orden que las categorías del
+        // seed: impresión 3D, electrónica, cableado, herramientas,
+        // mecánica, robótica). "cat-neutral" es el color de reserva para
+        // una categoría nueva que no esté en la lista de abajo.
+        "cat-teal": "#1D8A79",
+        "cat-blue": "#2E6CA4",
+        "cat-orange": "#C97A2B",
+        "cat-red": "#B14A32",
+        "cat-purple": "#6C4F9E",
+        "cat-pink": "#BD3E77",
+        "cat-neutral": "#5B6472",
+
+        // Color de marca (botones, enlaces, foco): uno solo, fijo, NO es
+        // un color de categoría — así el botón "Comprar en Amazon" se ve
+        // igual en cualquier producto, y solo la tarjeta cambia de color
+        // según su categoría.
+        accent: "#2A3342",
+        "accent-dark": "#1B212B",
+        // Para estados de aviso en el admin (p. ej. la etiqueta "Borrador").
+        warn: "#B8860B",
       },
       fontFamily: {
         sans: ["var(--font-plex-sans)", "-apple-system", "sans-serif"],
@@ -44,4 +58,5 @@ module.exports = {
   },
   plugins: [],
 };
+
 

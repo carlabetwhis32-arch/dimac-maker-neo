@@ -2,21 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fondo frío, con una transición de color muy suave (no es un patrón ni
+   una textura repetida: un único degradado apenas perceptible) para que
+   no sea un plano totalmente uniforme. La personalidad visual principal
+   sigue viniendo de los colores de categoría en las tarjetas. */
 body {
-  background-color: theme("colors.kraft");
-  color: theme("colors.ink");
-}
-
-/* Textura sutil de fondo, evocando las estrías del cartón corrugado.
-   Deliberadamente discreta: se nota mirando de cerca, no salta a la vista. */
-body {
-  background-image: repeating-linear-gradient(
-    135deg,
-    theme("colors.ink" / 5%) 0px,
-    theme("colors.ink" / 5%) 1px,
-    transparent 1px,
-    transparent 9px
+  background-color: theme("colors.base");
+  background-image: linear-gradient(
+    160deg,
+    theme("colors.base") 0%,
+    #ECEDF6 55%,
+    #EAEFF2 100%
   );
+  background-attachment: fixed;
+  color: theme("colors.ink");
 }
 
 /* Línea divisoria "muy fina y casi imperceptible" que pide la sección 7. */
@@ -26,15 +25,14 @@ body {
 
 /* Estado visual de un producto en borrador dentro del panel de admin. */
 .badge-draft {
-  @apply inline-block rounded-full bg-kraft border border-ochre/40 text-ochre text-xs px-2 py-0.5;
+  @apply inline-block rounded-full bg-base border border-warn/40 text-warn text-xs px-2 py-0.5;
 }
 .badge-published {
   @apply inline-block rounded-full bg-accent/10 border border-accent/30 text-accent-dark text-xs px-2 py-0.5;
 }
 
-/* Precio mostrado como si fuera una etiqueta de ficha técnica: fuente
-   monoespaciada (única cita a lo "técnico" en toda la interfaz, justificada
-   porque el contenido real ya son medidas/specs) sobre un pequeño chip. */
+/* Precio: fuente monoespaciada, deliberadamente sobria para no competir
+   con el color de categoría de la propia tarjeta. */
 .price-tag {
-  @apply font-mono text-ink;
+  @apply font-mono text-ink font-semibold;
 }

@@ -66,7 +66,7 @@ export default function ImageGallery({ images, productName }) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="aspect-square bg-paper border border-border rounded-sm flex items-center justify-center text-muted text-sm">
+      <div className="aspect-square bg-paper border border-border rounded-xl flex items-center justify-center text-muted text-sm">
         Sin imagen
       </div>
     );
@@ -81,7 +81,7 @@ export default function ImageGallery({ images, productName }) {
         <button
           type="button"
           onClick={() => openLightbox(activeIndex)}
-          className="block w-full aspect-square overflow-hidden rounded-sm bg-paper border border-border cursor-zoom-in"
+          className="block w-full aspect-square overflow-hidden rounded-xl bg-paper border border-border cursor-zoom-in"
           aria-label="Ampliar imagen"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -124,7 +124,7 @@ export default function ImageGallery({ images, productName }) {
                 setActiveIndex(index);
                 setZoom(1);
               }}
-              className={`h-16 w-16 overflow-hidden rounded-sm border-2 shrink-0 transition-colors ${
+              className={`h-16 w-16 overflow-hidden rounded-lg border-2 shrink-0 transition-colors ${
                 index === activeIndex ? "border-accent" : "border-border hover:border-muted"
               }`}
               aria-label={`Ver imagen ${index + 1}`}

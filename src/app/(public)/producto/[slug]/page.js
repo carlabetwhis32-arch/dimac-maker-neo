@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { formatPrice } from "@/lib/format";
 import { AMAZON_DISCLOSURE_SHORT } from "@/lib/legalText";
+import { getCategoryColor } from "@/lib/categoryColors";
 import ImageGallery from "@/components/ImageGallery";
 import BackButton from "@/components/BackButton";
 
@@ -22,6 +23,8 @@ export default async function ProductPage({ params }) {
     notFound();
   }
 
+  const color = getCategoryColor(product.category.slug);
+
   return (
     <div className="space-y-6">
       <BackButton label="Volver al catálogo" />
@@ -31,23 +34,26 @@ export default async function ProductPage({ params }) {
 
         <div className="space-y-6">
           <div>
-            <span className="inline-block text-xs text-muted border border-border rounded-full px-2.5 py-0.5 mb-3">
+            <span
+              className={`inline-flex items-center gap-1.5 text-xs ${color.text} border ${color.borderSoft} rounded-full px-2.5 py-0.5 mb-3`}
+            >
+              <span className={`h-1.5 w-1.5 rounded-full ${color.solid}`} />
               {product.category.name}
             </span>
             <h1 className="text-2xl font-bold text-ink">{product.name}</h1>
-            <p className="price-tag text-xl mt-2 text-copper">
+            <p className="price-tag text-xl mt-2">
               {formatPrice(product.price)}
             </p>
           </div>
 
-          <div className="space-y-2 border-l-2 border-accent/40 pl-4">
+          <div className="space-y-2 border-l-2 border-border pl-4">
             <h2 className="text-sm font-semibold text-ink">Descripción</h2>
             <p className="text-ink whitespace-pre-line leading-relaxed">
               {product.description}
             </p>
           </div>
 
-          <div className="space-y-2 border-l-2 border-copper/40 pl-4">
+          <div className={`space-y-2 border-l-2 ${color.borderSoft} pl-4`}>
             <h2 className="text-sm font-semibold text-ink">Comentario DIMAC</h2>
             <p className="text-ink whitespace-pre-line leading-relaxed">
               {product.comment}
@@ -59,7 +65,7 @@ export default async function ProductPage({ params }) {
               href={product.amazonUrl}
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block bg-accent hover:bg-accent-dark text-white font-medium px-6 py-3 rounded-sm transition-colors"
+              className="inline-block bg-accent hover:bg-accent-dark text-white font-medium px-6 py-3 rounded-lg transition-colors"
             >
               Comprar en Amazon
             </a>

@@ -26,13 +26,14 @@ export default async function HomePage({ searchParams }) {
     orderBy: { createdAt: "desc" },
     include: {
       images: { orderBy: { position: "asc" }, take: 1 },
+      category: { select: { slug: true } },
     },
   });
 
   return (
     <div className="space-y-10">
       <section>
-        <p className="text-base text-muted max-w-2xl">
+        <p className="text-base text-muted max-w-md mx-auto text-center">
           {settings?.introText ??
             "Recomendaciones de piezas y herramientas para proyectos Maker."}
         </p>

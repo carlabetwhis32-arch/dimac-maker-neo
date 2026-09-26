@@ -42,7 +42,7 @@ export default async function LoginPage({ searchParams }) {
         )}
 
         {isConfigError && (
-          <div className="text-sm text-copper bg-copper/10 border border-copper/30 rounded-md px-3 py-2">
+          <div className="text-sm text-warn bg-warn/10 border border-warn/30 rounded-md px-3 py-2">
             <p className="font-medium mb-1">Hay un problema en la configuración, no en la contraseña:</p>
             <p>{configMessage}</p>
           </div>
