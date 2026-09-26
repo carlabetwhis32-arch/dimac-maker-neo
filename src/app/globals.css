@@ -7,11 +7,16 @@ body {
   color: theme("colors.ink");
 }
 
-/* Textura muy sutil sobre el fondo, como el grano del cartón/papel kraft.
-   Deliberadamente discreta: se nota al mirar de cerca, no salta a la vista. */
+/* Textura sutil de fondo, evocando las estrías del cartón corrugado.
+   Deliberadamente discreta: se nota mirando de cerca, no salta a la vista. */
 body {
-  background-image: radial-gradient(theme("colors.ink" / 3%) 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-image: repeating-linear-gradient(
+    135deg,
+    theme("colors.ink" / 5%) 0px,
+    theme("colors.ink" / 5%) 1px,
+    transparent 1px,
+    transparent 9px
+  );
 }
 
 /* Línea divisoria "muy fina y casi imperceptible" que pide la sección 7. */
