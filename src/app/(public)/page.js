@@ -31,9 +31,14 @@ export default async function HomePage({ searchParams }) {
   });
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-5">
       <section>
-        <p className="text-base text-muted max-w-md mx-auto text-center">
+        {/* Sin max-w: si el texto es corto, se ve corto y centrado; si el
+            admin escribe una línea larga, se usa todo el ancho disponible.
+            whitespace-pre-line respeta los saltos de línea que el propio
+            admin escriba en el textarea de /admin/portada, en vez de que
+            el navegador decida dónde cortar. */}
+        <p className="text-base text-muted text-center whitespace-pre-line">
           {settings?.introText ??
             "Recomendaciones de piezas y herramientas para proyectos Maker."}
         </p>

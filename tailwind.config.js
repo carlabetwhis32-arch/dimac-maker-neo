@@ -1,13 +1,12 @@
 /**
- * Paleta de DIMAC MAKER — v3.
+ * Paleta de DIMAC MAKER — v4.
  *
- * Cambio de dirección pedido explícitamente: el fondo ya no es cálido/kraft,
- * sino frío y neutro (grafito muy claro), y el color ya no rota tarjeta a
- * tarjeta: cada CATEGORÍA tiene su propio color fijo (ver
- * src/lib/categoryColors.js), que se usa tanto en el selector de categoría
- * como en las tarjetas de sus productos. El fondo se queda deliberadamente
- * discreto para que sean esos colores de categoría, y las fotos de
- * producto, los que den la personalidad — no un patrón decorativo.
+ * El fondo vuelve a ser tono cartón/kraft (con textura, ver globals.css),
+ * pero cada CATEGORÍA tiene su propio color fijo (ver
+ * src/lib/categoryColors.js) que se usa tanto en el selector de categoría
+ * como en el borde/franja de las tarjetas de sus productos. El color de
+ * fondo es independiente del color de categoría a propósito: cambiar uno
+ * nunca debe afectar al otro.
  */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -19,12 +18,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Fondo y neutros: fríos, no cálidos (petición explícita).
-        base: "#EEF0F3",
+        // Fondo tono cartón: con carácter, ni gris frío ni casi-blanco.
+        base: "#DFC9A2",
         paper: "#FFFFFF",
-        ink: "#1C1F24",
-        muted: "#5B6472",
-        border: "#DCE1E7",
+        ink: "#211D17",
+        muted: "#6B5F4C",
+        border: "#C7AE7D",
 
         // Un color fijo por categoría (mismo orden que las categorías del
         // seed: impresión 3D, electrónica, cableado, herramientas,

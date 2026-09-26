@@ -16,7 +16,7 @@ export default function ProductCard({ product }) {
   return (
     <Link
       href={`/producto/${product.slug}`}
-      className={`group block rounded-xl overflow-hidden bg-paper border ${color.borderSoft} shadow-sm hover:shadow-md transition-shadow`}
+      className={`group block rounded-xl overflow-hidden bg-paper border-2 ${color.borderSoft} shadow-sm hover:shadow-md transition-shadow`}
     >
       {/* Franja de color: identifica la categoría de un vistazo, sin que
           el color invada toda la tarjeta ni compita con la foto. */}

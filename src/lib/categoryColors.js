@@ -9,18 +9,18 @@
  * se usen solo aquí, nunca escritas literalmente en un componente.
  */
 const PALETTE = [
-  { bg: "bg-cat-teal", border: "border-cat-teal", borderSoft: "border-cat-teal/35", text: "text-cat-teal", solid: "bg-cat-teal" },
-  { bg: "bg-cat-blue", border: "border-cat-blue", borderSoft: "border-cat-blue/35", text: "text-cat-blue", solid: "bg-cat-blue" },
-  { bg: "bg-cat-orange", border: "border-cat-orange", borderSoft: "border-cat-orange/35", text: "text-cat-orange", solid: "bg-cat-orange" },
-  { bg: "bg-cat-red", border: "border-cat-red", borderSoft: "border-cat-red/35", text: "text-cat-red", solid: "bg-cat-red" },
-  { bg: "bg-cat-purple", border: "border-cat-purple", borderSoft: "border-cat-purple/35", text: "text-cat-purple", solid: "bg-cat-purple" },
-  { bg: "bg-cat-pink", border: "border-cat-pink", borderSoft: "border-cat-pink/35", text: "text-cat-pink", solid: "bg-cat-pink" },
+  { bg: "bg-cat-teal", border: "border-cat-teal", borderSoft: "border-cat-teal/55", text: "text-cat-teal", solid: "bg-cat-teal" },
+  { bg: "bg-cat-blue", border: "border-cat-blue", borderSoft: "border-cat-blue/55", text: "text-cat-blue", solid: "bg-cat-blue" },
+  { bg: "bg-cat-orange", border: "border-cat-orange", borderSoft: "border-cat-orange/55", text: "text-cat-orange", solid: "bg-cat-orange" },
+  { bg: "bg-cat-red", border: "border-cat-red", borderSoft: "border-cat-red/55", text: "text-cat-red", solid: "bg-cat-red" },
+  { bg: "bg-cat-purple", border: "border-cat-purple", borderSoft: "border-cat-purple/55", text: "text-cat-purple", solid: "bg-cat-purple" },
+  { bg: "bg-cat-pink", border: "border-cat-pink", borderSoft: "border-cat-pink/55", text: "text-cat-pink", solid: "bg-cat-pink" },
 ];
 
 const NEUTRAL = {
   bg: "bg-cat-neutral",
   border: "border-cat-neutral",
-  borderSoft: "border-cat-neutral/35",
+  borderSoft: "border-cat-neutral/55",
   text: "text-cat-neutral",
   solid: "bg-cat-neutral",
 };

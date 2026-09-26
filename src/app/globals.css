@@ -2,19 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fondo frío, con una transición de color muy suave (no es un patrón ni
-   una textura repetida: un único degradado apenas perceptible) para que
-   no sea un plano totalmente uniforme. La personalidad visual principal
-   sigue viniendo de los colores de categoría en las tarjetas. */
+/* Fondo tono cartón con una textura muy sutil (líneas diagonales finas,
+   como el cartón corrugado). Los colores de categoría de las tarjetas
+   son independientes de este fondo: solo cambia el "papel" sobre el que
+   se apoyan, nunca su propio color. */
 body {
   background-color: theme("colors.base");
-  background-image: linear-gradient(
-    160deg,
-    theme("colors.base") 0%,
-    #ECEDF6 55%,
-    #EAEFF2 100%
+  background-image: repeating-linear-gradient(
+    135deg,
+    theme("colors.ink" / 6%) 0px,
+    theme("colors.ink" / 6%) 1px,
+    transparent 1px,
+    transparent 9px
   );
-  background-attachment: fixed;
   color: theme("colors.ink");
 }
 

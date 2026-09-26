@@ -8,7 +8,7 @@ export default function PublicLayout({ children }) {
   return (
     <>
       <Header />
-      <main className="max-w-site mx-auto px-6 py-10 min-h-[60vh]">
+      <main className="max-w-site mx-auto px-6 py-6 min-h-[60vh]">
         {children}
       </main>
       <Footer />
