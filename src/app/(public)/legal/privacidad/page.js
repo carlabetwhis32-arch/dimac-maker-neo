@@ -7,15 +7,14 @@ export default function PrivacidadPage() {
     <LegalPage title="Política de privacidad" updated="[FECHA]">
       <p>
         <strong>
-          ⚠️ Plantilla base a revisar y completar con tus datos reales (ver
-          README).
+        
         </strong>
       </p>
 
       <h2>1. Responsable del tratamiento</h2>
       <ul className="list-disc pl-5 space-y-1">
-        <li>Responsable: [NOMBRE Y APELLIDOS O RAZÓN SOCIAL]</li>
-        <li>Contacto: [EMAIL DE CONTACTO]</li>
+        <li>Responsable: [DIMAC]</li>
+        <li>Contacto: [dimac.oficial@gmail.com]</li>
       </ul>
 
       <h2>2. Qué datos tratamos</h2>
@@ -43,7 +42,7 @@ export default function PrivacidadPage() {
       <p>
         Cualquier persona tiene derecho a acceder, rectificar y suprimir sus
         datos, así como a solicitar la limitación, oposición o portabilidad
-        de los mismos, escribiendo a [EMAIL DE CONTACTO]. También tiene
+        de los mismos, escribiendo a [dimac.oficial@gmail.com]. También tiene
         derecho a presentar una reclamación ante la Agencia Española de
         Protección de Datos (www.aepd.es) si considera que el tratamiento no
         se ajusta a la normativa vigente.

@@ -5,7 +5,7 @@ export const metadata = { title: "Afiliación con Amazon — DIMAC MAKER" };
 
 export default function AfiliacionAmazonPage() {
   return (
-    <LegalPage title="Afiliación con Amazon" updated="[FECHA]">
+    <LegalPage title="Afiliación con Amazon" updated="[27/09/2026]">
       <p className="font-medium">{AMAZON_DISCLOSURE}</p>
 
       <p>

@@ -4,7 +4,7 @@ export const metadata = { title: "Política de cookies — DIMAC MAKER" };
 
 export default function CookiesPage() {
   return (
-    <LegalPage title="Política de cookies" updated="[FECHA]">
+    <LegalPage title="Política de cookies" updated="[27/09/2026]">
       <h2>¿Qué son las cookies?</h2>
       <p>
         Las cookies son pequeños archivos que un sitio web guarda en tu

@@ -4,12 +4,10 @@ export const metadata = { title: "Aviso legal — DIMAC MAKER" };
 
 export default function AvisoLegalPage() {
   return (
-    <LegalPage title="Aviso legal" updated="[FECHA]">
+    <LegalPage title="Aviso legal" updated="[27/09/2026]">
       <p>
         <strong>
-          ⚠️ Plantilla base. Los campos entre corchetes son placeholders y
-          deben rellenarse con tus datos reales antes de publicar la web
-          (ver README, sección "Antes de publicar en Internet").
+          
         </strong>
       </p>
 
@@ -20,13 +18,13 @@ export default function AvisoLegalPage() {
         (LSSI-CE), se informa de los siguientes datos:
       </p>
       <ul className="list-disc pl-5 space-y-1">
-        <li>Titular: [NOMBRE Y APELLIDOS O RAZÓN SOCIAL]</li>
-        <li>NIF/CIF: [NIF/CIF]</li>
-        <li>Domicilio: [DIRECCIÓN COMPLETA]</li>
-        <li>Correo electrónico de contacto: [EMAIL DE CONTACTO]</li>
+        <li>Titular: [DIMAC]</li>
+        <li>NIF/CIF: [-]</li>
+        <li>Domicilio: [España]</li>
+        <li>Correo electrónico de contacto: [dimac.oficial@gmail.com]</li>
         <li>
           Datos registrales (si aplica, p. ej. si operas como autónomo o
-          sociedad dado de alta): [DATOS REGISTRALES SI PROCEDE]
+          sociedad dado de alta): [-]
         </li>
       </ul>
 
@@ -34,7 +32,7 @@ export default function AvisoLegalPage() {
       <p>
         DIMAC MAKER es un sitio web de recomendaciones sobre productos
         relacionados con el mundo Maker (impresión 3D, electrónica,
-        cableado, herramientas, mecánica y robótica). DIMAC MAKER no vende
+        cableado, herramientas, mecánica, robótica...). DIMAC MAKER no vende
         productos directamente: se limita a mostrar información y enlaces
         que dirigen a Amazon, donde se completa la compra. Consulta también
         la página{" "}
@@ -56,7 +54,7 @@ export default function AvisoLegalPage() {
       <h2>4. Propiedad intelectual</h2>
       <p>
         Los textos, comentarios e imágenes propias de DIMAC MAKER son
-        propiedad de [NOMBRE Y APELLIDOS O RAZÓN SOCIAL], salvo que se
+        propiedad de [DIMAC], salvo que se
         indique lo contrario. Las imágenes y datos de producto proceden, en
         parte, de sus fabricantes o de Amazon, y se muestran a título
         informativo.
