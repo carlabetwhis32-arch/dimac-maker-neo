@@ -35,26 +35,25 @@ export default async function ProductPage({ params }) {
         <div className="space-y-6">
           <div>
             <span
-              className={`inline-flex items-center gap-1.5 text-xs ${color.text} border ${color.borderSoft} rounded-full px-2.5 py-0.5 mb-3`}
+              className={`inline-block text-xs font-bold text-paper border-2 border-ink rounded-full px-3 py-1 mb-3 ${color.solid}`}
             >
-              <span className={`h-1.5 w-1.5 rounded-full ${color.solid}`} />
               {product.category.name}
             </span>
-            <h1 className="text-2xl font-bold text-ink">{product.name}</h1>
+            <h1 className="font-sans text-2xl font-bold text-ink">{product.name}</h1>
             <p className="price-tag text-xl mt-2">
               {formatPrice(product.price)}
             </p>
           </div>
 
-          <div className="space-y-2 border-l-2 border-border pl-4">
-            <h2 className="text-sm font-semibold text-ink">Descripción</h2>
+          <div className="space-y-2 border-l-[3px] border-ink pl-4">
+            <h2 className="font-sans text-sm font-bold text-ink">Descripción</h2>
             <p className="text-ink whitespace-pre-line leading-relaxed">
               {product.description}
             </p>
           </div>
 
-          <div className={`space-y-2 border-l-2 ${color.borderSoft} pl-4`}>
-            <h2 className="text-sm font-semibold text-ink">Comentario DIMAC</h2>
+          <div className={`space-y-2 border-l-[3px] pl-4 ${color.border}`}>
+            <h2 className="font-sans text-sm font-bold text-ink">Comentario DIMAC</h2>
             <p className="text-ink whitespace-pre-line leading-relaxed">
               {product.comment}
             </p>
@@ -65,7 +64,7 @@ export default async function ProductPage({ params }) {
               href={product.amazonUrl}
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block bg-accent hover:bg-accent-dark text-white font-medium px-6 py-3 rounded-lg transition-colors"
+              className="press inline-block bg-sun hover:bg-sun-dark text-ink font-sans font-bold px-6 py-3 rounded-lg border-2 border-ink shadow-hard transition-all"
             >
               Comprar en Amazon
             </a>

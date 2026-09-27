@@ -1,12 +1,14 @@
 /**
- * Paleta de DIMAC MAKER — v4.
+ * Paleta de DIMAC MAKER — v5. "Neobrutalismo de taller".
  *
- * El fondo vuelve a ser tono cartón/kraft (con textura, ver globals.css),
- * pero cada CATEGORÍA tiene su propio color fijo (ver
- * src/lib/categoryColors.js) que se usa tanto en el selector de categoría
- * como en el borde/franja de las tarjetas de sus productos. El color de
- * fondo es independiente del color de categoría a propósito: cambiar uno
- * nunca debe afectar al otro.
+ * Carta blanca del cliente: esta versión rompe deliberadamente con todas
+ * las anteriores (kraft/pastel/minimal). La idea: bordes negros gruesos,
+ * sombras duras sin difuminado ("de pegatina/etiqueta troquelada"),
+ * colores vivos y un amarillo de marca — inspirado en cinta de
+ * señalización de taller, serigrafía y diagramas de ingeniería, no en
+ * dashboards de SaaS. Sigue habiendo un color fijo por categoría
+ * (src/lib/categoryColors.js), pero ahora vive en una franja/etiqueta
+ * sólida, no en un tinte sutil.
  */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -18,44 +20,43 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Fondo tono cartón: con carácter, ni gris frío ni casi-blanco.
-        base: "#DFC9A2",
+        canvas: "#F5F1E6",
         paper: "#FFFFFF",
-        ink: "#211D17",
-        muted: "#6B5F4C",
-        border: "#C7AE7D",
+        ink: "#141414",
+        muted: "#5C5648",
+        border: "#141414",
+        sun: "#FFD400",
+        "sun-dark": "#E0B400",
 
-        // Un color fijo por categoría (mismo orden que las categorías del
-        // seed: impresión 3D, electrónica, cableado, herramientas,
-        // mecánica, robótica). "cat-neutral" es el color de reserva para
-        // una categoría nueva que no esté en la lista de abajo.
-        "cat-teal": "#1D8A79",
-        "cat-blue": "#2E6CA4",
-        "cat-orange": "#C97A2B",
-        "cat-red": "#B14A32",
-        "cat-purple": "#6C4F9E",
-        "cat-pink": "#BD3E77",
-        "cat-neutral": "#5B6472",
+        "cat-teal": "#00A99A",
+        "cat-blue": "#2F5FFF",
+        "cat-orange": "#FF8A00",
+        "cat-red": "#FF3B30",
+        "cat-purple": "#8B5CF6",
+        "cat-pink": "#FF3D9A",
+        "cat-neutral": "#6B7280",
 
-        // Color de marca (botones, enlaces, foco): uno solo, fijo, NO es
-        // un color de categoría — así el botón "Comprar en Amazon" se ve
-        // igual en cualquier producto, y solo la tarjeta cambia de color
-        // según su categoría.
-        accent: "#2A3342",
-        "accent-dark": "#1B212B",
-        // Para estados de aviso en el admin (p. ej. la etiqueta "Borrador").
-        warn: "#B8860B",
+        accent: "#141414",
+        "accent-dark": "#000000",
+        warn: "#E0B400",
       },
       fontFamily: {
-        sans: ["var(--font-plex-sans)", "-apple-system", "sans-serif"],
-        mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
+        sans: ["var(--font-grotesk)", "-apple-system", "sans-serif"],
+        body: ["var(--font-body)", "-apple-system", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: {
         site: "1280px",
+      },
+      boxShadow: {
+        hard: "6px 6px 0 0 #141414",
+        "hard-sm": "3px 3px 0 0 #141414",
+        "hard-press": "2px 2px 0 0 #141414",
       },
     },
   },
   plugins: [],
 };
+
 
 

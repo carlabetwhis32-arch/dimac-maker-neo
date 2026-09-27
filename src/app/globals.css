@@ -2,37 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fondo tono cartón con una textura muy sutil (líneas diagonales finas,
-   como el cartón corrugado). Los colores de categoría de las tarjetas
-   son independientes de este fondo: solo cambia el "papel" sobre el que
-   se apoyan, nunca su propio color. */
+/* Fondo tipo "papel de ingeniero": rejilla de puntos discreta sobre un
+   blanco roto cálido. Nada de degradados suaves ni texturas orgánicas:
+   aquí la referencia es el papel cuadriculado de un cuaderno de taller,
+   no una plantilla de SaaS. */
 body {
-  background-color: theme("colors.base");
-  background-image: repeating-linear-gradient(
-    135deg,
-    theme("colors.ink" / 6%) 0px,
-    theme("colors.ink" / 6%) 1px,
-    transparent 1px,
-    transparent 9px
-  );
+  background-color: theme("colors.canvas");
+  background-image: radial-gradient(theme("colors.ink" / 14%) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
   color: theme("colors.ink");
 }
 
-/* Línea divisoria "muy fina y casi imperceptible" que pide la sección 7. */
+/* Línea divisoria estructural (ya no "casi imperceptible": aquí las
+   líneas son parte del lenguaje visual, gruesas y negras a propósito). */
 .hairline {
-  border-top: 1px solid theme("colors.border");
+  border-top: 2px solid theme("colors.ink");
 }
 
-/* Estado visual de un producto en borrador dentro del panel de admin. */
 .badge-draft {
-  @apply inline-block rounded-full bg-base border border-warn/40 text-warn text-xs px-2 py-0.5;
+  @apply inline-flex items-center gap-1 rounded-md bg-warn/20 border-2 border-warn text-ink text-xs font-bold px-2 py-0.5;
 }
 .badge-published {
-  @apply inline-block rounded-full bg-accent/10 border border-accent/30 text-accent-dark text-xs px-2 py-0.5;
+  @apply inline-flex items-center gap-1 rounded-md bg-cat-teal/15 border-2 border-cat-teal text-ink text-xs font-bold px-2 py-0.5;
 }
 
-/* Precio: fuente monoespaciada, deliberadamente sobria para no competir
-   con el color de categoría de la propia tarjeta. */
 .price-tag {
-  @apply font-mono text-ink font-semibold;
+  @apply font-mono text-ink font-bold;
+}
+
+/* Botón/tarjeta "de pegatina": sombra dura sin difuminado que se
+   "aplasta" al pulsar, como si de verdad se apretara un botón físico. */
+.press {
+  @apply transition-all duration-100 active:translate-x-[3px] active:translate-y-[3px] active:shadow-none;
 }

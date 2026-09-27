@@ -3,11 +3,10 @@ import { formatPrice } from "@/lib/format";
 import { getCategoryColor } from "@/lib/categoryColors";
 
 /**
- * Tarjeta de producto (sección 10): imagen, nombre y precio, dentro de
- * una única tarjeta redondeada y con separación clara del fondo. El color
- * viene de la categoría del producto (no rota al azar): así, dentro de
- * "Electrónica", todas las tarjetas comparten el mismo color, y en "Todo"
- * se ven los distintos colores mezclados.
+ * Tarjeta "de pegatina troquelada": borde negro grueso + sombra dura sin
+ * difuminado que se aplasta al pulsar (clase .press). El color de la
+ * categoría vive en la franja sólida de arriba, separada del resto por
+ * una línea negra — no es un tinte de fondo, es una etiqueta de color.
  */
 export default function ProductCard({ product }) {
   const mainImage = product.images?.[0];
@@ -16,19 +15,17 @@ export default function ProductCard({ product }) {
   return (
     <Link
       href={`/producto/${product.slug}`}
-      className={`group block rounded-xl overflow-hidden bg-paper border-2 ${color.borderSoft} shadow-sm hover:shadow-md transition-shadow`}
+      className="press group block rounded-lg border-[3px] border-ink bg-paper shadow-hard hover:shadow-hard-sm hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
     >
-      {/* Franja de color: identifica la categoría de un vistazo, sin que
-          el color invada toda la tarjeta ni compita con la foto. */}
-      <div className={`h-1.5 ${color.solid}`} />
+      <div className={`h-3 ${color.solid} border-b-[3px] border-ink`} />
 
-      <div className="aspect-square w-full overflow-hidden bg-base">
+      <div className="aspect-square w-full overflow-hidden bg-canvas">
         {mainImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={mainImage.url}
             alt={product.name}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover"
             loading="lazy"
           />
         ) : (
@@ -38,7 +35,7 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      <div className="p-3 space-y-1">
+      <div className="p-3 space-y-1 border-t-[3px] border-ink">
         <p className="text-sm text-ink leading-snug line-clamp-2">
           {product.name}
         </p>

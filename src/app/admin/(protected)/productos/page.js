@@ -35,7 +35,7 @@ export default async function AdminProductsPage() {
             key={product.id}
             className="flex items-center gap-4 p-3"
           >
-            <div className="h-14 w-14 shrink-0 rounded bg-base border border-border overflow-hidden">
+            <div className="h-14 w-14 shrink-0 rounded bg-canvas border border-border overflow-hidden">
               {product.images[0] && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img

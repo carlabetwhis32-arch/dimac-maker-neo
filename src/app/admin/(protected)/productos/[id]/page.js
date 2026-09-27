@@ -72,7 +72,7 @@ export default async function EditProductPage({ params, searchParams }) {
               key={image.id}
               className="w-32 border border-border rounded-md bg-paper p-2 space-y-2"
             >
-              <div className="relative aspect-square rounded overflow-hidden bg-base">
+              <div className="relative aspect-square rounded overflow-hidden bg-canvas">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={image.url}

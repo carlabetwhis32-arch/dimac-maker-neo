@@ -1,19 +1,25 @@
-import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-// IBM Plex se diseñó originalmente para documentación técnica/de ingeniería
-// de IBM: encaja con el mundo Maker mejor que una sans genérica de SaaS.
-// La mono se usa solo para el precio (ver .price-tag en globals.css), no
-// como decoración general.
-const plexSans = IBM_Plex_Sans({
+// Space Grotesk (titulares, wordmark, botones, precios): geometría algo
+// técnica/de diagrama, con carácter propio, muy alejada de una sans
+// genérica de SaaS. Inter para el cuerpo de texto: neutra y muy legible
+// en párrafos largos (descripciones de producto), para que el carácter
+// fuerte se quede en los titulares, no en cada línea de texto.
+const grotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-plex-sans",
+  weight: ["500", "600", "700"],
+  variable: "--font-grotesk",
 });
-const plexMono = IBM_Plex_Mono({
+const body = Inter({
   subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-plex-mono",
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-mono",
 });
 
 export const metadata = {
@@ -34,7 +40,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={`${plexSans.variable} ${plexMono.variable} font-sans antialiased`}>
+      <body className={`${grotesk.variable} ${body.variable} ${mono.variable} font-body antialiased`}>
         {children}
       </body>
     </html>
